@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viagem</title>
+    <style>
+        h1{
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-size: 48pt;
+            color: red;
+
+        }
+    </style>
+</head>
+<body>
+    <h1>Gasto com a viagem</h1>
+
+<label for="tipoCombustivel">Qual combustível?:</label>
+<select id="tipoCombustivel">
+  <option value="gasolina">Gasolina</option>
+  <option value="alcool">Álcool</option>
+  <option value="diesel">Diesel</option>
+</select><br>
+
+<label for="consumo">Consumo (km/l):</label>
+<input type="number" id="consumo" step="0.01"><br>
+
+<label for="distancia">Distância (km):</label>
+<input type="number" id="distancia"><br>
+
+<button onclick="calcularGasto()">Resultado</button>
+
+<p id="resultado"></p>
+
+<script>
+function calcularGasto() {
+    var tipoCombustivel = document.getElementById("tipoCombustivel").value;
+    var consumo = parseFloat(document.getElementById("consumo").value);
+    var distancia = parseInt(document.getElementById("distancia").value);
+    var resultado = document.getElementById("resultado");
+
+    var precoCombustivelPorLitro;
+    switch (tipoCombustivel) {
+        case "gasolina":
+            precoCombustivelPorLitro = 4.50; 
+            break;
+        case "alcool":
+            precoCombustivelPorLitro = 3.00; 
+            break;
+        case "diesel":
+            precoCombustivelPorLitro = 3.80; 
+            break;
+        default:
+            precoCombustivelPorLitro = 0;
+    }
+
+    if (precoCombustivelPorLitro === 0) {
+        resultado.textContent = "Por favor, selecione um tipo de combustível válido.";
+        return;
+    }
+
+    var gastoTotal = (distancia / consumo) * precoCombustivelPorLitro;
+    resultado.textContent = "O gasto de combustível no total será de R$ " + gastoTotal.toFixed(2);
+}
+</script>
+</body>
+</html>
